@@ -19,17 +19,14 @@ function App() {
   const [defination, setDefination] = useState("")
 
   const handleSearch = () => {
-    setDefination("");
-    dictionary.map((ele) => {
-      if (ele.word.toLocaleLowerCase() === word.trim().toLocaleLowerCase()) {
-        setDefination(ele.meaning);
-      }
-    });
+    const result = dictionary.find((ele) => ele.word.toLowerCase() === word.trim().toLowerCase())
+    console.log(result);
 
-    // if (defination === "") {
-    //   setDefination("Word not found in the dictionary.")
-    // }
-
+    if (result) {
+      setDefination(result.meaning)
+    } else {
+      setDefination("Word not found in the dictionary.");
+    }
   }
 
 
@@ -43,7 +40,7 @@ function App() {
         <button onClick={handleSearch}>Search</button>
       </div>
 
-      <h3>Definition:</h3> <p>{word ? (defination ? defination : "Word not found in the dictionary.") : ""}</p>
+      <h3>Definition:</h3> <p>{defination}</p>
 
     </div>
   )
